@@ -16,6 +16,16 @@ import java.util.ArrayList;
 public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.ListViewHolder> {
     private ArrayList<Movie> listMovie;
 
+    private OnItemClickCallback onItemClickCallback;
+
+    public interface OnItemClickCallback {
+        void onItemClicked(Movie data);
+    }
+
+    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback;
+    }
+
     public ListMovieAdapter(ArrayList<Movie> list) {
         this.listMovie = list;
     }
@@ -38,6 +48,13 @@ public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.List
 
         holder.tvName.setText(movie.getName());
         holder.tvDescription.setText(movie.getDescription());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickCallback.onItemClicked(listMovie.get(holder.getAdapterPosition()));
+            }
+        });
     }
 
     @Override

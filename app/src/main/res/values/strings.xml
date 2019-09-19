@@ -7,6 +7,10 @@
     <string name="movies">Selamat datang di halaman Movies</string>
     <string name="movie_name">Movie Name</string>
     <string name="movie_desc">Movie Description. Lorem ipsum dulur sedulur dulur</string>
+    <string name="movie_image">Movie Image</string>
+    <string name="user_score">User Score</string>
+    <string name="runtime">Runtime</string>
+    <string name="genres">Genres</string>
 
     <array name="data_photo_movie">
         <item>@drawable/poster_alita</item>
@@ -22,6 +26,20 @@
         <item>@drawable/poster_spiderman</item>
         <item>@drawable/poster_t34</item>
     </array>
+    <array name="data_photo_tv">
+        <item>@drawable/poster_arrow</item>
+        <item>@drawable/poster_dragon_ball</item>
+        <item>@drawable/poster_fairytail</item>
+        <item>@drawable/poster_flash</item>
+        <item>@drawable/poster_god</item>
+        <item>@drawable/poster_gotham</item>
+        <item>@drawable/poster_hanna</item>
+        <item>@drawable/poster_iron_fist</item>
+        <item>@drawable/poster_naruto_shipudden</item>
+        <item>@drawable/poster_supergirl</item>
+        <item>@drawable/poster_the_umbrella</item>
+        <item>@drawable/poster_the_walking_dead</item>
+    </array>
 
     <string-array name="data_name_movie">
         <item>Alita: Battle Angle (2019)</item>
@@ -35,7 +53,6 @@
         <item>Overloard (2018)</item>
         <item>Robin Hood (2018)</item>
         <item>Spider-Man Into The Spider-Verse (2018)</item>
-
         <item>Venom (2018)</item>
     </string-array>
 
