@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -24,9 +23,12 @@ public class MoviesFragment extends Fragment {
     private View rootview;
     private RecyclerView rvMovies;
     private ArrayList<Movie> list = new ArrayList<>();
+    private TypedArray dataPhotoMovie;
     private String[] dataNameMovie;
     private String[] dataDescriptionMovie;
-    private TypedArray dataPhotoMovie;
+    private String[] dataUserScoreMovie;
+    private String[] dataRuntimeMovie;
+    private String[] dataGenresMovie;
 
     public MoviesFragment() {
         // Required empty public constructor
@@ -49,9 +51,12 @@ public class MoviesFragment extends Fragment {
     }
 
     private void prepareData() {
+        dataPhotoMovie = getResources().obtainTypedArray(R.array.data_photo_movie);
         dataNameMovie = getResources().getStringArray(R.array.data_name_movie);
         dataDescriptionMovie = getResources().getStringArray(R.array.data_description_movie);
-        dataPhotoMovie = getResources().obtainTypedArray(R.array.data_photo_movie);
+        dataUserScoreMovie = getResources().getStringArray(R.array.data_user_score_movie);
+        dataRuntimeMovie = getResources().getStringArray(R.array.data_runtime_movie);
+        dataGenresMovie = getResources().getStringArray(R.array.data_genres_movie);
     }
 
     private ArrayList<Movie> addItem() {
@@ -60,9 +65,12 @@ public class MoviesFragment extends Fragment {
         for (int i = 0; i < dataNameMovie.length; i++) {
             Movie movie = new Movie();
 
+            movie.setPhoto(dataPhotoMovie.getResourceId(i, -1));
             movie.setName(dataNameMovie[i]);
             movie.setDescription(dataDescriptionMovie[i]);
-            movie.setPhoto(dataPhotoMovie.getResourceId(i, -1));
+            movie.setUserScore(dataUserScoreMovie[i]);
+            movie.setRuntime(dataRuntimeMovie[i]);
+            movie.setGenres(dataGenresMovie[i]);
 
             movieList.add(movie);
         }
@@ -84,8 +92,10 @@ public class MoviesFragment extends Fragment {
     }
 
     private void showSelectedMovie(Movie movie) {
-//        Toast.makeText(getActivity(), "Movie: " + movie.getName(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), "Movie: " + movie.getName() + "\nUser Score: " + movie.getUserScore(), Toast.LENGTH_SHORT).show();
         Intent movieDetailIntent = new Intent(getContext(), MovieDetailActivity.class);
+        movieDetailIntent.putExtra(MovieDetailActivity.EXTRA_ACTIONBAR_TITLE, getString(R.string.movie_detail));
+        movieDetailIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE_DETAIL, movie);
         startActivity(movieDetailIntent);
     }
 }

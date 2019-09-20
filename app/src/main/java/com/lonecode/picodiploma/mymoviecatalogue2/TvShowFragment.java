@@ -1,6 +1,7 @@
 package com.lonecode.picodiploma.mymoviecatalogue2;
 
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,9 +22,12 @@ public class TvShowFragment extends Fragment {
     private View rootview;
     private RecyclerView rvTvShow;
     private ArrayList<Movie> list = new ArrayList<>();
+    private TypedArray dataPhotoMovie;
     private String[] dataNameMovie;
     private String[] dataDescriptionMovie;
-    private TypedArray dataPhotoMovie;
+    private String[] dataUserScoreMovie;
+    private String[] dataRuntimeMovie;
+    private String[] dataGenresMovie;
 
     public TvShowFragment() {
         // Required empty public constructor
@@ -48,9 +52,12 @@ public class TvShowFragment extends Fragment {
     }
 
     private void prepareData() {
-        dataNameMovie = getResources().getStringArray(R.array.data_name_movie);
-        dataDescriptionMovie = getResources().getStringArray(R.array.data_description_movie);
         dataPhotoMovie = getResources().obtainTypedArray(R.array.data_photo_tv);
+        dataNameMovie = getResources().getStringArray(R.array.data_name_tv);
+        dataDescriptionMovie = getResources().getStringArray(R.array.data_description_tv);
+        dataUserScoreMovie = getResources().getStringArray(R.array.data_user_score_tv);
+        dataRuntimeMovie = getResources().getStringArray(R.array.data_runtime_tv);
+        dataGenresMovie = getResources().getStringArray(R.array.data_genres_tv);
     }
 
     private ArrayList<Movie> addItem() {
@@ -59,9 +66,12 @@ public class TvShowFragment extends Fragment {
         for (int i = 0; i < dataNameMovie.length; i++) {
             Movie movie = new Movie();
 
+            movie.setPhoto(dataPhotoMovie.getResourceId(i, -1));
             movie.setName(dataNameMovie[i]);
             movie.setDescription(dataDescriptionMovie[i]);
-            movie.setPhoto(dataPhotoMovie.getResourceId(i, -1));
+            movie.setUserScore(dataUserScoreMovie[i]);
+            movie.setRuntime(dataRuntimeMovie[i]);
+            movie.setGenres(dataGenresMovie[i]);
 
             tvShowList.add(movie);
         }
@@ -83,6 +93,10 @@ public class TvShowFragment extends Fragment {
     }
 
     private void showSelectedTv(Movie data) {
-        Toast.makeText(getActivity(), "Tv: " + data.getName(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), "Tv: " + data.getName(), Toast.LENGTH_SHORT).show();
+        Intent movieDetailIntent = new Intent(getContext(), MovieDetailActivity.class);
+        movieDetailIntent.putExtra(MovieDetailActivity.EXTRA_ACTIONBAR_TITLE, getString(R.string.tvshow_detail));
+        movieDetailIntent.putExtra(MovieDetailActivity.EXTRA_MOVIE_DETAIL, data);
+        startActivity(movieDetailIntent);
     }
 }
